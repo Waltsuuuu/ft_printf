@@ -6,7 +6,7 @@
 /*   By: wheino <wheino@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 12:26:56 by wheino            #+#    #+#             */
-/*   Updated: 2025/06/03 15:41:59 by wheino           ###   ########.fr       */
+/*   Updated: 2025/06/05 17:34:06 by wheino           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,35 @@
 
 int	main()
 {
+	int count;
 
-	printf("Test 1 count = %d\n\n)", ft_printf("Print decimal (digit) = %d\n", 99));
-	ft_printf("Char = %c\n", 'A');
+	count = 0;
+	
+	// %c Prints a single character
+	char a = 'A';
+	printf("\nTEST #1\nPrint the character 'A', chars written = 1:\n");
+	count = ft_printf("%c", a);
+	printf("\nChars written = %d\n", count);
+
+	char b = 'B';
+	printf("\nTEST #2\nPrint the character 'A' and 'B', chars written = 2:\n");
+	count = ft_printf("%c%c", a, b);
+	printf("\nChars written = %d\n", count);
+	
+	// %s Prints a string
+	char *str = "Hello World";
+	printf("\nTEST#2\nPrint the string \"Hello World\", chars written = 11\n");
+	count = ft_printf("%s", str);
+	printf("\nChars written = %d\n", count);
+	
 	return 0;
 }
 
 
+// Things to remember
+// If write fails or any other error occurs - Return value == -1.
+// Check if input string is null.
+ 
 // Loop through the "format" string
 // Print each character
 // If character is a format specifier (%), skip it
@@ -36,8 +58,8 @@ int	main()
 //  
 
 
-// %c Prints a single character.
-// %s Prints a string (as defined by the common C convention).
+// OK - %c Prints a single character.
+// OK - %s Prints a string (as defined by the common C convention).
 // %p The void * pointer argument has to be printed in hexadecimal format.
 // %d Prints a decimal (base 10) number.
 // %i Prints an integer in base 10.
