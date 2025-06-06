@@ -6,7 +6,7 @@
 /*   By: wheino <wheino@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 12:26:56 by wheino            #+#    #+#             */
-/*   Updated: 2025/06/05 17:34:06 by wheino           ###   ########.fr       */
+/*   Updated: 2025/06/06 16:33:34 by wheino           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,36 @@ int	main()
 	count = ft_printf("%s", str);
 	printf("\nChars written = %d\n", count);
 	
+	// %d Prints a decimal (base 10) number.
+	int decimal = -214;
+	printf("\nTEST#3\nPrint the decimal number -214, chars written = 4\n");
+	printf("\nReal printf output == %d\n", decimal);
+	count = ft_printf("%d", decimal);
+	printf("\nChars written = %d\n", count);
+
+	// %i Prints an integer in base 10.
+	int integer = 3456;
+	printf("\nTEST#4\nPrint the integer 3456, chars written = 4\n");
+	printf("\nReal printf output == %i\n", integer);
+	count = ft_printf("%i", integer);
+	printf("\nChars written = %d\n", count);
+	
+	// %u Prints an unsigned decimal (base 10) number.
+	unsigned int unsigned_decimal = 214;
+	printf("\nTEST#4\nPrint the unsigned decimal 214, chars written = 3\n");
+	printf("\nReal printf output == %u\n", unsigned_decimal);
+	count = ft_printf("%u", unsigned_decimal);
+	printf("\nChars written = %d\n", count);
+
+	// %% Prints a percent sign.
+	printf("\nTEST#4\nPrint a percent sign '%%'\n");
+	printf("\nReal printf with a percent sign, no trailing characters == %%");
+	printf("\nReal printf with a percent sign, WITH trailing characters == %%///\n\n");
+	count = ft_printf("Percent sign, no trailing chacracters = %%");
+	printf("\nChars written = %d\n", count);
+	count = ft_printf("Percent sign, WITH trailing characters = %%///");
+	printf("\nChars written = %d\n", count);
+	
 	return 0;
 }
 
@@ -60,10 +90,10 @@ int	main()
 
 // OK - %c Prints a single character.
 // OK - %s Prints a string (as defined by the common C convention).
-// %p The void * pointer argument has to be printed in hexadecimal format.
-// %d Prints a decimal (base 10) number.
-// %i Prints an integer in base 10.
-// %u Prints an unsigned decimal (base 10) number.
+// OK - %d Prints a decimal (base 10) number.
+// OK - %i Prints an integer in base 10.
+// OK - %u Prints an unsigned decimal (base 10) number.
+// OK - %% Prints a percent sign.
 // %x Prints a number in hexadecimal (base 16) lowercase format.
 // %X Prints a number in hexadecimal (base 16) uppercase format.
-// %% Prints a percent sign.
+// %p The void * pointer argument has to be printed in hexadecimal format.

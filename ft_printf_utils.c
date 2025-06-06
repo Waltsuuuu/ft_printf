@@ -6,50 +6,11 @@
 /*   By: wheino <wheino@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:31:04 by wheino            #+#    #+#             */
-/*   Updated: 2025/06/05 17:32:57 by wheino           ###   ########.fr       */
+/*   Updated: 2025/06/06 17:06:15 by wheino           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-int loop_str(const char *str, va_list ap)
-{
-	int	chars_written;
-	
-	chars_written = 0;
-	while(*str != '\0')
-	{
-		if(*str == '%')
-		{
-			chars_written += handle_format(*(++str), ap);
-			if (chars_written < 0)
-				return (-1);
-		}
-		else
-		{
-			if (write(1, str, 1) < 0)
-				return (-1);
-			chars_written++;
-		}
-		str++;
-	}
-	return (chars_written);
-}
-
-int	handle_format(char specifier, va_list ap)
-{
-	int		chars_written;
-	
-	if (specifier == 'c')
-		chars_written = print_char(va_arg(ap, int));
-	else if (specifier == 's')
-		chars_written = print_str(va_arg(ap, char *));
-	
-	if (chars_written > 0)
-		return (chars_written);
-	else
-		return (0);
-}
 
 int	print_char(int c)
 {
@@ -76,4 +37,59 @@ int	print_str(char *s)
 		i++;
 	}
 	return (i);
+}
+
+int	print_signed(int n)
+{
+	int chars_written;
+
+	chars_written = 0;
+	if (n == -2147483648)
+	{
+		chars_written = write(1, "-2147483648", 11);
+		if (chars_written < 1)
+			return (-1);
+		else
+			return (chars_written);
+	}
+	if (n < 0)
+	{
+		chars_written += write(1, "-", 1);
+		if (chars_written < 1)
+			return (-1);
+		n = -n;
+	}
+	chars_written += print_unsigned(n);
+	return (chars_written);
+}
+
+int	print_unsigned(unsigned int n)
+{
+	char	digit;
+	int		chars_written;
+	
+	chars_written = 0;
+	if (n > 9)
+		chars_written = print_unsigned(n / 10);
+	digit = n % 10 + '0';
+	if (write(1, &digit, 1) < 1)
+		return (-1);
+	return (chars_written + 1);
+}
+
+int print_hex(int n, char specifier)
+{
+	char *hex_digits;
+	
+
+	if (specifier == 'x')
+		hex_digits = "0123456789abcdef";
+	else
+		hex_digits = "0123456789ABCDEF";
+	if (n == 0)
+		write(1, "0", 1);
+	while (n > 0)
+	{
+		
+	}
 }

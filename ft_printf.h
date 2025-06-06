@@ -6,7 +6,7 @@
 /*   By: wheino <wheino@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:30:38 by wheino            #+#    #+#             */
-/*   Updated: 2025/06/05 17:27:22 by wheino           ###   ########.fr       */
+/*   Updated: 2025/06/06 14:15:47 by wheino           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ int	handle_format(char specifier, va_list ap);
 int loop_str(const char *str, va_list ap);
 int	print_char(int c);
 int	print_str(char *s);
-
-
+int	print_signed(int n);
+int	print_unsigned(unsigned int n);
 #endif
