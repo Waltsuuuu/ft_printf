@@ -6,7 +6,7 @@
 /*   By: wheino <wheino@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:31:04 by wheino            #+#    #+#             */
-/*   Updated: 2025/06/06 17:06:15 by wheino           ###   ########.fr       */
+/*   Updated: 2025/06/07 16:31:43 by wheino           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	print_char(int c)
 {
-	char ch;
+	char	ch;
 
 	ch = (char)c;
 	if (write(1, &ch, 1) < 1)
-		 return (-1);
+		return (-1);
 	else
 		return (1);
 }
@@ -26,9 +26,14 @@ int	print_char(int c)
 int	print_str(char *s)
 {
 	int	i;
-	
-	if (!s)
-		return (-1);
+
+	if (s == NULL)
+	{
+		if (write(1, "(null)", 6) < 0)
+			return (-1);
+		else
+			return (6);
+	}
 	i = 0;
 	while (s[i] != '\0')
 	{
@@ -41,7 +46,7 @@ int	print_str(char *s)
 
 int	print_signed(int n)
 {
-	int chars_written;
+	int	chars_written;
 
 	chars_written = 0;
 	if (n == -2147483648)
@@ -67,7 +72,7 @@ int	print_unsigned(unsigned int n)
 {
 	char	digit;
 	int		chars_written;
-	
+
 	chars_written = 0;
 	if (n > 9)
 		chars_written = print_unsigned(n / 10);
@@ -77,19 +82,24 @@ int	print_unsigned(unsigned int n)
 	return (chars_written + 1);
 }
 
-int print_hex(int n, char specifier)
+int	print_pointer(void *p)
 {
-	char *hex_digits;
-	
+	int	chars_written;
+	int	res;
 
-	if (specifier == 'x')
-		hex_digits = "0123456789abcdef";
-	else
-		hex_digits = "0123456789ABCDEF";
-	if (n == 0)
-		write(1, "0", 1);
-	while (n > 0)
+	if (!p)
 	{
-		
+		chars_written = print_str("(nil)");
+		if (chars_written < 5)
+			return (-1);
+		return (chars_written);
 	}
+	chars_written = print_str("0x");
+	if (chars_written < 2)
+		return (-1);
+	res = print_hex_low((unsigned long)p);
+	if (res < 0)
+		return (-1);
+	chars_written += res;
+	return (chars_written);
 }

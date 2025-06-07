@@ -6,7 +6,7 @@
 /*   By: wheino <wheino@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:31:15 by wheino            #+#    #+#             */
-/*   Updated: 2025/06/06 16:56:59 by wheino           ###   ########.fr       */
+/*   Updated: 2025/06/07 16:41:23 by wheino           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_printf(const char *str, ...)
 {
-	va_list ap;
+	va_list	ap;
 	int		chars_written;
 
 	if (!str)
@@ -25,20 +25,22 @@ int	ft_printf(const char *str, ...)
 	return (chars_written);
 }
 
-int loop_str(const char *str, va_list ap)
+int	loop_str(const char *str, va_list ap)
 {
 	int	chars_written;
-	
+	int	res;
+
 	chars_written = 0;
-	while(*str != '\0')
+	while (*str != '\0')
 	{
-		if(*str == '%')
+		if (*str == '%')
 		{
 			str++;
 			if (*str != '\0')
-				chars_written += handle_format(*str++, ap);
-			if (chars_written < 0)
+				res = handle_format(*str++, ap);
+			if (res < 0)
 				return (-1);
+			chars_written += res;
 		}
 		else
 		{
@@ -54,7 +56,7 @@ int loop_str(const char *str, va_list ap)
 int	handle_format(char specifier, va_list ap)
 {
 	int		chars_written;
-	
+
 	chars_written = 0;
 	if (specifier == 'c')
 		chars_written = print_char(va_arg(ap, int));
@@ -64,13 +66,71 @@ int	handle_format(char specifier, va_list ap)
 		chars_written = print_signed(va_arg(ap, int));
 	else if (specifier == 'u')
 		chars_written = print_unsigned(va_arg(ap, int));
-	else if (specifier == 'x' || specifier == 'X')
-		chars_written = print_hex(va_arg(ap, int), specifier);
+	else if (specifier == 'x')
+		chars_written = print_hex_low(va_arg(ap, unsigned long));
+	else if (specifier == 'X')
+		chars_written = print_hex_up(va_arg(ap, unsigned long));
+	else if (specifier == 'p')
+		chars_written = print_pointer(va_arg(ap, void *));
 	else if (specifier == '%')
 		chars_written = print_char(specifier);
-	
-	if (chars_written > 0)
-		return (chars_written);
-	else
-		return (0);
+	return (chars_written);
+}
+
+int	print_hex_low(unsigned long n)
+{
+	char	*hex_digits;
+	char	buffer[16];
+	int		chars_written;
+	int		i;
+
+	if (n < 0)
+		return (-1);
+	hex_digits = "0123456789abcdef";
+	chars_written = 0;
+	if (n == 0)
+		return (print_char('0'));
+	i = 0;
+	while (n > 0)
+	{
+		buffer[i++] = hex_digits[n % 16];
+		n = n / 16;
+	}
+	while (--i >= 0)
+	{
+		if (write(1, &buffer[i], 1) != 1)
+			return (-1);
+		else
+			chars_written++;
+	}
+	return (chars_written);
+}
+
+int	print_hex_up(unsigned long n)
+{
+	char	*hex_digits;
+	char	buffer[16];
+	int		chars_written;
+	int		i;
+
+	hex_digits = "0123456789ABCDEF";
+	if (n < 0)
+		return (-1);
+	chars_written = 0;
+	if (n == 0)
+		return (print_char('0'));
+	i = 0;
+	while (n > 0)
+	{
+		buffer[i++] = hex_digits[n % 16];
+		n = n / 16;
+	}
+	while (--i >= 0)
+	{
+		if (write(1, &buffer[i], 1) != 1)
+			return (-1);
+		else
+			chars_written++;
+	}
+	return (chars_written);
 }
