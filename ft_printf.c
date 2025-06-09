@@ -6,7 +6,7 @@
 /*   By: wheino <wheino@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:31:15 by wheino            #+#    #+#             */
-/*   Updated: 2025/06/07 16:41:23 by wheino           ###   ########.fr       */
+/*   Updated: 2025/06/09 13:03:16 by wheino           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ int	handle_format(char specifier, va_list ap)
 	else if (specifier == 'u')
 		chars_written = print_unsigned(va_arg(ap, int));
 	else if (specifier == 'x')
-		chars_written = print_hex_low(va_arg(ap, unsigned long));
+		chars_written = print_hex_low(va_arg(ap, unsigned int));
 	else if (specifier == 'X')
-		chars_written = print_hex_up(va_arg(ap, unsigned long));
+		chars_written = print_hex_up(va_arg(ap, unsigned int));
 	else if (specifier == 'p')
 		chars_written = print_pointer(va_arg(ap, void *));
 	else if (specifier == '%')
@@ -77,15 +77,13 @@ int	handle_format(char specifier, va_list ap)
 	return (chars_written);
 }
 
-int	print_hex_low(unsigned long n)
+int	print_hex_low(unsigned long long n)
 {
 	char	*hex_digits;
 	char	buffer[16];
 	int		chars_written;
 	int		i;
 
-	if (n < 0)
-		return (-1);
 	hex_digits = "0123456789abcdef";
 	chars_written = 0;
 	if (n == 0)
@@ -106,7 +104,7 @@ int	print_hex_low(unsigned long n)
 	return (chars_written);
 }
 
-int	print_hex_up(unsigned long n)
+int	print_hex_up(unsigned long long n)
 {
 	char	*hex_digits;
 	char	buffer[16];
@@ -114,8 +112,6 @@ int	print_hex_up(unsigned long n)
 	int		i;
 
 	hex_digits = "0123456789ABCDEF";
-	if (n < 0)
-		return (-1);
 	chars_written = 0;
 	if (n == 0)
 		return (print_char('0'));

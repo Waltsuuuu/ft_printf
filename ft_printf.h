@@ -6,7 +6,7 @@
 /*   By: wheino <wheino@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:30:38 by wheino            #+#    #+#             */
-/*   Updated: 2025/06/07 16:24:40 by wheino           ###   ########.fr       */
+/*   Updated: 2025/06/09 13:03:32 by wheino           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	print_char(int c);
 int	print_str(char *s);
 int	print_signed(int n);
 int	print_unsigned(unsigned int n);
-int	print_hex_low(unsigned long n);
-int	print_hex_up(unsigned long n);
+int	print_hex_low(unsigned long long n);
+int	print_hex_up(unsigned long long n);
 int	print_pointer(void *p);
 #endif

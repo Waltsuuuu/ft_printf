@@ -6,7 +6,7 @@
 /*   By: wheino <wheino@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:31:04 by wheino            #+#    #+#             */
-/*   Updated: 2025/06/07 16:31:43 by wheino           ###   ########.fr       */
+/*   Updated: 2025/06/09 13:02:32 by wheino           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	print_pointer(void *p)
 	chars_written = print_str("0x");
 	if (chars_written < 2)
 		return (-1);
-	res = print_hex_low((unsigned long)p);
+	res = print_hex_low((unsigned long long)p);
 	if (res < 0)
 		return (-1);
 	chars_written += res;
