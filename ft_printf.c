@@ -6,7 +6,7 @@
 /*   By: wheino <wheino@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:31:15 by wheino            #+#    #+#             */
-/*   Updated: 2025/06/09 13:34:51 by wheino           ###   ########.fr       */
+/*   Updated: 2025/06/09 14:55:07 by wheino           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	loop_str(const char *str, va_list *ap)
 	int	res;
 
 	chars_written = 0;
+	res = 0;
 	while (*str != '\0')
 	{
 		if (*str == '%')

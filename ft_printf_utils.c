@@ -6,7 +6,7 @@
 /*   By: wheino <wheino@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:31:04 by wheino            #+#    #+#             */
-/*   Updated: 2025/06/09 13:02:32 by wheino           ###   ########.fr       */
+/*   Updated: 2025/06/09 14:52:11 by wheino           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	print_str(char *s)
 int	print_signed(int n)
 {
 	int	chars_written;
+	int	res;
 
 	chars_written = 0;
 	if (n == -2147483648)
@@ -64,7 +65,10 @@ int	print_signed(int n)
 			return (-1);
 		n = -n;
 	}
-	chars_written += print_unsigned(n);
+	res = print_unsigned(n);
+	if (res < 0)
+		return (-1);
+	chars_written += res;
 	return (chars_written);
 }
 

@@ -6,15 +6,15 @@
 /*   By: wheino <wheino@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 15:30:38 by wheino            #+#    #+#             */
-/*   Updated: 2025/06/09 13:33:44 by wheino           ###   ########.fr       */
+/*   Updated: 2025/06/09 13:45:30 by wheino           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include <stdarg.h> //For variadic args
-# include <unistd.h> //For write
+# include <stdarg.h>
+# include <unistd.h>
 
 int	ft_printf(const char *format, ...);
 int	handle_format(char specifier, va_list *ap);
